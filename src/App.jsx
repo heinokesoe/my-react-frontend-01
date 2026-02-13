@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import TestAPI from "./components/TestAPI";
 import ItemManager from "./components/ItemManager";
 import UserManager from "./components/UserManager";
@@ -11,27 +11,35 @@ import { useUser } from "./contexts/UserProvider";
 
 import Navbar from "./components/Navbar";
 
-function App() {
+const Layout = () => {
   return (
     <>
       <Navbar />
-      <Routes>
+      <Outlet />
+    </>
+  );
+};
+
+function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<ItemManager />} />
         <Route path="/user" element={<UserManager />} />
         <Route path="/test_api" element={<TestAPI />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={
-          <RequireAuth>
-            <Profile />
-          </RequireAuth>
-        } />
-        <Route path="/logout" element={
-          <RequireAuth>
-            <Logout />
-          </RequireAuth>
-        } />
-      </Routes>
-    </>
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={
+        <RequireAuth>
+          <Logout />
+        </RequireAuth>
+      } />
+      <Route path="/profile" element={
+        <RequireAuth>
+          <Profile />
+        </RequireAuth>
+      } />
+    </Routes>
   )
 }
 export default App;
