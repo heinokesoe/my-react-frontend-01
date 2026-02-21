@@ -6,7 +6,7 @@ function TestAPI() {
   
     useEffect(() => {
       async function fetchData() {
-        const result = await fetch("http://localhost:3000/api/hello");
+        const result = await fetch(`${import.meta.env.VITE_API_URL}/api/hello`);
         const data = await result.json();
         console.log("result: ", result);
         console.log("data:", data);

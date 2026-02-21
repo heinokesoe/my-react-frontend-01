@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/item';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api/item`;
 
 /**
  * Fetch all items from the backend
